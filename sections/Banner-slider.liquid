@@ -1,0 +1,143 @@
+{% render 'slick-css-files' %}
+{% render 'slick-js-files' %}
+{{ 'banner-slider.css' | asset_url | stylesheet_tag }}
+<<section id="main-banner">
+  <div class="banner-wrapper fw-100">
+      {% for block in section.blocks %}
+           {% if block.settings.image != blank %}
+      <div class="banner-slide" style="background-image: url({{block.settings.image | img_url: 'master'}});">
+          <div class="banner-text-wrap">
+           {% if block.settings.heading != blank %}
+              <h1>{{block.settings.heading}}</h1>
+           {% endif %}
+          {% if block.settings.sub-heading != blank %}
+              <p class="mt-20">{{block.settings.sub-heading}}</p>
+          {% endif %}
+          {% if block.settings.btn-text != blank %}
+              <a href="{{block.settings.btn-link}}" class="g-btn mt-20">{{block.settings.btn-text}}</a>
+          {% endif %}
+          </div>
+      </div>
+              {% endif %}
+      {% endfor %}
+  </div>
+</section>
+
+<script>
+  $('.banner-wrapper').slick({
+    dots: {{section.settings.dots}},
+    arrows: {{section.settings.arrows}},
+    infinite: {{section.settings.infinite}},
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: {{section.settings.autoplay}},
+    autoplaySpeed: {{section.settings.slider-speed}},
+    fade: true,
+    pauseOnHover: false
+    {% comment %} prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+    nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>" {% endcomment %}
+});
+</script>
+{% comment %} <script src="{{ 'banner-slider.js' | asset_url }}" defer></script> {% endcomment %}
+
+
+{% schema %}
+{
+  "name": "custom banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "infinite",
+      "default": false,
+      "label": "Infinte Slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "default": true,
+      "label": "Autoplay Slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "Dots",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "Arrows",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "slider-speed",
+      "min": 1000,
+      "max": 9000,
+      "step": 1000,
+      "default": 4000,
+      "label": "Slider Speed"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "banner",
+      "limit": 10,
+      "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Slider Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Image banner",
+          "label": "Banner Heading"
+        },
+        {
+            "type": "text",
+            "id": "sub-heading",
+            "default": "Image banner Sub Heading",
+            "label": "Banner SubHeading"
+          },
+         {
+             "type": "text",
+             "id": "btn-text",
+             "label": "Button Text",
+             "default": "Button"
+         },
+        {
+            "type": "url",
+            "id": "btn-url",
+            "label": "Button Link"
+        },
+        {
+            "type": "range",
+            "id": "image_overlay_opacity",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "unit": "%",
+            "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+            "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner",
+      "blocks": [
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
