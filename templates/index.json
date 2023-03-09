@@ -6,8 +6,9 @@
         "template--14507152375890__21808bfe-cc9a-44df-9489-c87fa2a99a55-1678334673f2f96021-0": {
           "type": "banner",
           "settings": {
-            "heading": "Image banner",
-            "sub-heading": "Image banner Sub Heading",
+            "image": "shopify:\/\/shop_images\/laptop-from-above.jpg",
+            "heading": "Lorem Ipsum Dolor Amet",
+            "sub-heading": "Lorem ipsum dolor sit amet. Qui consequuntur facilis et maiores reiciendis ut nulla aliquid eum quasi quisquam in soluta vero non exercitationem laborio",
             "btn-text": "Button",
             "btn-url": "",
             "image_overlay_opacity": 0
